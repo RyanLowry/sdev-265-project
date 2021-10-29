@@ -10,25 +10,21 @@ export class RecipeSelectorComponent implements OnInit {
   ingredientsItem:string = '';
   preparedItem:string = '';
   steps:string[] = [];
-  @ViewChild("measure",{read:ElementRef}) measurementChild? : ElementRef
-  @ViewChild("ingredient") ingredientChild? : ElementRef
-  @ViewChild("prepared") preparedChild? : ElementRef
-
 
   constructor() { }
 
   ngOnInit(): void {
   }
-  checkComplete(secti:any){
-    switch(secti.section) {
+  checkComplete(sectionItem:any){
+    switch(sectionItem.section) {
       case 'measurement':
-        this.measurementItem = secti.value;
+        this.measurementItem = sectionItem.value;
         break;
         case 'ingredients':
-          this.ingredientsItem = secti.value;
+          this.ingredientsItem = sectionItem.value;
         break;
         case 'prepared':
-          this.preparedItem = secti.value;
+          this.preparedItem = sectionItem.value;
           break;
     }
   }

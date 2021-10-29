@@ -4,10 +4,11 @@
     <mat-tab label="ingredients"><app-item-selector #ingredient (itemCompleteEvent) = "checkComplete($event)"  [currentType]="'ingredients'"></app-item-selector></mat-tab>
     <mat-tab label="prepared"><app-item-selector #prepared (itemCompleteEvent) = "checkComplete($event)" [currentType]="'prepared'"></app-item-selector></mat-tab>
 </mat-tab-group>
-<div>{{measurementItem}}</div>
-<div>{{ingredientsItem}}</div>
-<div>{{preparedItem}}</div>
-<button *ngIf="measurementItem != '' && ingredientsItem != '' && preparedItem != ''" (click)="generateIngredients()">Enter</button>
+<div>Measurement:{{measurementItem}}</div>
+<div>Ingredient:{{ingredientsItem}}</div>
+<div>Prepared:{{preparedItem}}</div>
+
+<button style="margin-top:15px;" *ngIf="measurementItem != '' && ingredientsItem != '' && preparedItem != ''" (click)="generateIngredients()">Enter</button>
 <div *ngFor="let step of steps">
     {{step}}
 </div>
