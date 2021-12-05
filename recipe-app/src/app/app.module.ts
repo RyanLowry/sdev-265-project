@@ -11,6 +11,9 @@ import { PasswordResetComponent } from './components/password-reset/password-res
 import { ChecklistComponent } from './components/checklist/checklist.component';
 import { UserInformationComponent } from './components/user-information/user-information.component';
 import { ShareRecipeComponent } from './components/share-recipe/share-recipe.component';
+import { MatTab, MatTabsModule } from '@angular/material/tabs';
+
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import { ShareRecipeComponent } from './components/share-recipe/share-recipe.com
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatTabsModule,
+    HttpClientModule,
     // MatDialogModule,
     // MatDialogRef,
     BrowserAnimationsModule,

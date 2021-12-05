@@ -1,6 +1,7 @@
 // TODO:
 // Connect to DB and access/populate checklists checklists
 // Add ability to add new checklists
+// add checklist
 
 import { Component, OnInit } from '@angular/core';
 
@@ -10,6 +11,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./checklist.component.css']
 })
 export class ChecklistComponent implements OnInit {
+
+   checklists : string[] = [];
 
   constructor() { }
 

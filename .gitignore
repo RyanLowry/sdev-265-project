@@ -40,3 +40,7 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
+
+# Database config files and dependecies
+/recipe-app-server/config.js
+/recipe-app-server/node_modules

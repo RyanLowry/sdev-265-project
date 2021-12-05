@@ -44,6 +44,7 @@ export class ItemSelectorComponent implements OnInit, OnChanges {
 
       dialogRef.afterClosed().subscribe(result => {
         if (result != undefined) {
+          console.log(result)
           this.currentItem = result + ' ' + this.currentItem;
           this.itemCompleteEvent.emit({ section: this.currentType, value: this.currentItem });
         }
