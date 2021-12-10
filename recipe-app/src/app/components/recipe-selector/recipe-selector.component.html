@@ -24,7 +24,7 @@
 
     <h3>Ingredient list:</h3>
     <div *ngFor="let step of steps; let num = index">
-        <div (click)="changeItem(step)" class="ing-item"> {{num + 1}}: {{step.measurement}} {{step.ingredient}}
+        <div (click)="changeItem(step)" class="ing-item" [ngClass]="{'selected-item': selectedItem == step}"> {{num + 1}}: {{step.measurement}} {{step.ingredient}}
             {{step.preparation}}</div>
     </div>
 

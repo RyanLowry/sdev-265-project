@@ -33,11 +33,18 @@ export class RecipeSelectorComponent implements OnInit {
   }
 
   changeItem(item:RecipeItem){
-    console.log(item)
-    this.selectedItem = item;
-    this.measurementItem = item.measurement;
-    this.ingredientsItem = item.ingredient;
-    this.preparedItem = item.preparation;
+    if (this.selectedItem === item){
+      this.selectedItem = undefined;
+      this.measurementItem = '';
+      this.ingredientsItem = '';
+      this.preparedItem = '';
+    } else{
+      this.selectedItem = item;
+      this.measurementItem = item.measurement;
+      this.ingredientsItem = item.ingredient;
+      this.preparedItem = item.preparation;
+    }
+
 
   }
 

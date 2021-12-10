@@ -27,18 +27,18 @@ export class ServerService {
   }
 
   createAccount(event:any) {
-    return this.request('POST', `${environment.serverUrl}/register`,event);
+    return this.request('POST', `/register`,event);
   }
 
   loginAccount(event : any) {
-    return this.request('POST', `${environment.serverUrl}/auth`, event);
+    return this.request('POST', `/auth`, event);
   }
 
   createRecipe(event:any){
-    return this.request('POST',  `${environment.serverUrl}/addrecipe`, event)
+    return this.request('POST',  `/addrecipe`, event)
   }
   createChecklist(event:any){
-    return this.request('POST',  `${environment.serverUrl}/addchecklist`, event)
+    return this.request('POST',  `/addchecklist`, event)
 
   }
 
