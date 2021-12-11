@@ -5,6 +5,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Recipe } from 'src/app/models/recipe';
 import { ServerService } from 'src/app/server.service';
 import { DialogMeasurement } from '../item-selector/item-selector.component';
 
@@ -16,10 +17,25 @@ import { DialogMeasurement } from '../item-selector/item-selector.component';
 export class UserInformationComponent implements OnInit {
 
 
-  user:string = '';
-  sub:any;
+  user: string = '';
+  sub: any;
+  recipes: Recipe[] = [];
+  routeState: any;
 
-  constructor(private _Activatedroute:ActivatedRoute,private _router:Router,public dialog: MatDialog,private server:ServerService) { }
+  constructor(private _Activatedroute: ActivatedRoute, private _router: Router, public dialog: MatDialog, private server: ServerService) {
+    if (this._router) {
+      if (this._router.getCurrentNavigation()?.extras.state) {
+        this.routeState = this._router.getCurrentNavigation()?.extras.state;
+        if (this.routeState) {
+          this.user = this.routeState.user;
+          localStorage.setItem("username", this.user);
+        }
+      }
+    }
+    if (localStorage.getItem("username")) {
+      this.user = localStorage.getItem("username") || '';
+    }
+  }
 
   ngOnInit(): void {
     // this.sub = this._Activatedroute.params.subscribe(params => {
@@ -27,35 +43,54 @@ export class UserInformationComponent implements OnInit {
     //   this.user = params['user'];
     //   });
     //   console.log(this.user);
+    this.server.getRecipes({
+    }).then((e: any) => {
+      if (e.body.status === 'ok') {
+        console.log(e.body.recipes)
+        for (let recipe of e.body.recipes) {
+          this.recipes?.push(new Recipe(recipe.recipe_id, recipe.name, recipe.description))
+        }
+        // this.recipes?.push(new Recipe())
+        // this._router.navigateByUrl('/recipe-builder',{state:{user: e.body.user}})
+      } else {
+
+      }
+    })
   }
 
-
-  addRecipe(){
+  goToRecipeBuilder(id?:number){
+    if (id){
+      this._router.navigateByUrl(`/recipe-builder`, { state: { recipeId:id } })
+    }
+  }
+  addRecipe() {
     let dialogRef = this.dialog.open(RecipeCreateDialog, {
       width: '250px',
-      data: {type: 'recipe',name:'',description:'' }
+      data: { type: 'recipe', name: '', description: '' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
-        console.log(result)
-        this.server.loginAccount({
-          name:result.name,
-          description:result.description,
-        }).then((e:any) => {
-          if (e.body.status === 'ok'){
+        this.server.createRecipe({
+          name: result.name,
+          description: result.description,
+        }).then((e: any) => {
+          if (e.body.status === 'ok') {
             console.log(e)
+            this.recipes?.push(new Recipe(e.body.recipeId, result.name, result.description))
             // this._router.navigateByUrl('/recipe-builder',{state:{user: e.body.user}})
-          } else{
-    
+          } else {
+
           }
+        }).catch(e => {
+          console.log(e)
         })
         // this.currentItem = result + ' ' + this.currentItem;
       }
     });
   }
 
-  addChecklist(){
+  addChecklist() {
 
   }
 
@@ -73,7 +108,7 @@ export class UserInformationComponent implements OnInit {
 })
 export class RecipeCreateDialog {
 
-  type:string = '';
+  type: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<DialogMeasurement>,

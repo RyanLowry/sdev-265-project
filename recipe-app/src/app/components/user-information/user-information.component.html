@@ -18,6 +18,9 @@
         <button (click)="addRecipe()">
             Add Recipe
         </button>
+        <div *ngFor="let recipe of recipes">
+            <div (click)="goToRecipeBuilder(recipe.id)">{{recipe.name}}:{{recipe.description}}</div>
+        </div>
 
     </mat-tab>
     <mat-tab label="Checklists">

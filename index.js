@@ -5,7 +5,7 @@ var cors = require('cors')
 
 var path = require('path');
 const events = require('./events');
-
+// for testing, replace with a config with a valid path, try not to copy paste directly
 var connection = mysql.createConnection(process.env.JAWSDB_URL);
 
 connection.connect();
@@ -14,8 +14,8 @@ const port = process.env.PORT || 3000;
 const app = express()
     .use(session({
         secret: process.env.session_key || 'secret',
-        resave: true,
-        saveUninitialized: true
+        resave: false,
+        saveUninitialized: false
     }))
     .use(cors())
     .use(express.json())

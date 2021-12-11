@@ -29,8 +29,8 @@
     </div>
 
     <h3>Instructions:</h3>
-    <textarea rows="10"></textarea>
+    <textarea rows="10" #instructions></textarea>
 
     <h4>Submit:</h4>
-    <button>Submit item</button>
+    <button (click) = "updateRecipeInformation(instructions.value)">Submit item</button>
 </div>
