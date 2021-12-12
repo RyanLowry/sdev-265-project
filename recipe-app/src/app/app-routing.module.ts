@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 const routes: Routes = [
   {
     path: '',
-    redirectTo:'',
+    redirectTo:'/login',
     pathMatch:'full',
   },
   {

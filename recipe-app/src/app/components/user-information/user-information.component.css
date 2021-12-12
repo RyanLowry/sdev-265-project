@@ -1,0 +1,39 @@
+.recipe-card{
+    min-width:500px;
+}
+.recipe-buttons{
+    display: flex;
+    justify-content: space-between;
+}
+.recipe-description{
+    margin-bottom:25px;
+}
+.user-information{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.recipe-holder{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height:100%;
+
+
+}
+.user-header{
+    height:80vh;
+    display: flex;
+    flex-direction: column;
+    min-width:960px;
+
+}
+
+.user-tab-info{
+    display: flex;
+    flex-direction: column;
+    height:50vh;
+}
+.user-tab-info > button {
+    margin-bottom:15px;
+}

@@ -1,3 +1,4 @@
+<!-- // TODO: I have no idea why this isn't working, so find a way to make this center -->
 <div class="recipe-creator-container">
     <mat-tab-group>
         <mat-tab label="measurement">
@@ -13,24 +14,29 @@
             </app-item-selector>
         </mat-tab>
     </mat-tab-group>
+
     <div>Measurement:{{measurementItem}}</div>
     <div>Ingredient:{{ingredientsItem}}</div>
     <div>Prepared:{{preparedItem}}</div>
 
-    <button style="margin-top:15px;"
-        [disabled]="measurementItem === '' || ingredientsItem === '' || preparedItem === ''"
-        (click)="generateIngredients()">Enter Ingredient</button>
-
+    <div>
+        <button mat-raised-button color="primary" style="margin-top:15px; margin-bottom:15px;"
+            [disabled]="measurementItem === '' || ingredientsItem === ''" (click)="generateIngredients()">Save
+            Instruction</button>
+    </div>
 
     <h3>Ingredient list:</h3>
     <div *ngFor="let step of steps; let num = index">
-        <div (click)="changeItem(step)" class="ing-item" [ngClass]="{'selected-item': selectedItem == step}"> {{num + 1}}: {{step.measurement}} {{step.ingredient}}
+        <div (click)="changeItem(step)" class="ing-item" [ngClass]="{'selected-item': selectedItem == step}"> {{num
+            + 1}}: {{step.measurement}} {{step.ingredient}}
             {{step.preparation}}</div>
     </div>
+
 
     <h3>Instructions:</h3>
     <textarea rows="10" #instructions></textarea>
 
     <h4>Submit:</h4>
-    <button (click) = "updateRecipeInformation(instructions.value)">Submit item</button>
+    <button mat-raised-button color="primary" (click)="updateRecipeInformation(instructions.value)">Submit
+        item</button>
 </div>

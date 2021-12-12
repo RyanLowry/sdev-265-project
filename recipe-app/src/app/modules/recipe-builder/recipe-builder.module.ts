@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { FormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { RecipeBuilderRoutingModule} from './recipe-builder-routing.module'
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [ItemSelectorComponent,RecipeSelectorComponent,DialogMeasurement],
@@ -16,6 +17,7 @@ import { RecipeBuilderRoutingModule} from './recipe-builder-routing.module'
     MatButtonModule,
     FormsModule,
     MatDialogModule,
+    MatCardModule,
     RecipeBuilderRoutingModule
   ],
   bootstrap:[RecipeSelectorComponent]

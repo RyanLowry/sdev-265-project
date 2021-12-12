@@ -12,7 +12,6 @@ export class ServerService {
   }
 
   private async request(method: string, url: string, data?: any) {
-    console.log(data)
     const result = this.http.request(method, url, {
       withCredentials:true,
       body: data,
@@ -26,35 +25,37 @@ export class ServerService {
     });
   }
   // ADD ${environment.serverUrl} for testing
+  serverLocation:string = environment.serverUrl || '';
   createAccount(event:any) {
-    return this.request('POST', `/register`,event);
+    return this.request('POST', `${this.serverLocation}/register`,event);
   }
   loginAccount(event : any) {
-    return this.request('POST', `/auth`, event);
+    return this.request('POST', `${this.serverLocation}/auth`, event);
   }
   createRecipe(event:any){
-    return this.request('POST',  `/addRecipe`, event)
+    return this.request('POST',  `${this.serverLocation}/addRecipe`, event)
   }
   createChecklist(event:any){
-    return this.request('POST',  `/addChecklist`, event)
+    return this.request('POST',  `${this.serverLocation}/addChecklist`, event)
   }
   getRecipes(event:any){
-    return this.request('GET',  `/userRecipe`, event)
+    return this.request('GET',  `${this.serverLocation}/userRecipe`, event)
   }
   getrecipes(event:any){
-    return this.request('GET',  `/userChecklist`, event)
+    return this.request('GET',  `${this.serverLocation}/userChecklist`, event)
   }
+  // TODO: Make one of these get information differently
   setRecipeItems(event:any){
-    return this.request('POST',  `/recipeItem`, event)
+    return this.request('POST',  `${this.serverLocation}/recipeItem`, event)
   }
   getRecipeItems(event:any){
-    return this.request('POST',  `/recipeItems`, event)
+    return this.request('POST',  `${this.serverLocation}/recipeItems`, event)
   }
   updateRecipeItems(event:any){
-    return this.request('PUT',  `/recipeItem`, event)
+    return this.request('PUT',  `${this.serverLocation}/recipeItem`, event)
   }
   updateRecipeInfo(event:any){
-    return this.request('PUT',  `/updateRecipe`, event)
+    return this.request('PUT',  `${this.serverLocation}/updateRecipe`, event)
   }
 }
 // createAccount(event:any) {

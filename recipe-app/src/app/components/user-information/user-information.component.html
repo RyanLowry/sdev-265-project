@@ -6,26 +6,51 @@
 
 <!-- MAIN COMPONENT -->
 
+<div class="user-information">
+    <div>
+        <h3>
+            Welcome,{{user}}
+        </h3>
+    </div>
 
-<div>
-    <h3>
-        Welcome,{{user}}
-    </h3>
+    <mat-tab-group class="user-header">
+        <mat-tab label="Recipes">
+            <div class="user-tab-info">
+                <button mat-raised-button (click)="addRecipe()" color="primary">
+                    <mat-icon>add</mat-icon>
+                    Add Recipe
+                </button>
+                <div class="recipe-holder">
+                    <div *ngFor="let recipe of recipes">
+                        <mat-card class="recipe-card">
+
+                            <mat-card-content class="recipe-info">
+                                <h3 class="recipe-name">
+                                    {{recipe.name}}
+                                </h3>
+                                <div class="recipe-description">
+                                    Description: {{recipe.description}}
+                                </div>
+                            </mat-card-content>
+                            <mat-card-actions class="recipe-buttons">
+                                <button mat-raised-button (click)="goToRecipeBuilder(recipe.id)" color="primary">
+                                    View
+                                </button>
+                                <button mat-raised-button (click)="goToRecipeBuilder(recipe.id)" color="primary">
+                                    <mat-icon>edit</mat-icon>
+                                    Edit
+                                </button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+
+        </mat-tab>
+        <mat-tab label="Checklists" class="user-header">
+            <button (click)="addChecklist()">
+                Add Checklist
+            </button>
+        </mat-tab>
+    </mat-tab-group>
 </div>
-
-<mat-tab-group>
-    <mat-tab label="Recipes">
-        <button (click)="addRecipe()">
-            Add Recipe
-        </button>
-        <div *ngFor="let recipe of recipes">
-            <div (click)="goToRecipeBuilder(recipe.id)">{{recipe.name}}:{{recipe.description}}</div>
-        </div>
-
-    </mat-tab>
-    <mat-tab label="Checklists">
-        <button (click)="addChecklist()">
-            Add Checklist
-        </button>
-    </mat-tab>
-</mat-tab-group>

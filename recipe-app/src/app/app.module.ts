@@ -12,8 +12,10 @@ import { ChecklistComponent } from './components/checklist/checklist.component';
 import { UserInformationComponent } from './components/user-information/user-information.component';
 import { ShareRecipeComponent } from './components/share-recipe/share-recipe.component';
 import { MatTab, MatTabsModule } from '@angular/material/tabs';
-
+import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule} from '@angular/material/card'
 
 @NgModule({
   declarations: [
@@ -30,9 +32,12 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     MatTabsModule,
     HttpClientModule,
+    MatButtonModule,
+    MatIconModule,
     // MatDialogModule,
     // MatDialogRef,
     BrowserAnimationsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

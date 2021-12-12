@@ -12,7 +12,6 @@ function createRouter(db) {
     const router = express.Router();
 
     router.get('/', (request, response) => {
-        console.log(request)
         response.sendFile(path.join(__dirname, "recipe-app/dist/recipe-app/index.html"));
     })
 
@@ -55,9 +54,7 @@ function createRouter(db) {
         var ing = request.body.ingredient;
         var preparation = request.body.preparation;
         var recipeId = request.body.recipeId;
-        console.log(request.session)
         db.query('INSERT INTO recipe_items (ingredient,measurement,preparation,recipe_id) VALUES (?,?,?,?)', [ing,meas,preparation,recipeId], function (error, result) {
-            console.log(result)
             if (!error) {
                 response.status(200).json({ status: 'ok', itemId: result.insertId });
             } else {
@@ -95,7 +92,6 @@ function createRouter(db) {
     })
 
     // posts
-
     router.post('/register', function (request, response, next) {
         var username = request.body.username;
         var password = request.body.password;
@@ -120,8 +116,6 @@ function createRouter(db) {
     router.post('/addRecipe', function (request, response, next) {
         var name = request.body.name;
         var desc = request.body.description;
-        console.log(request.session)
-        console.log(name, desc, request.session.user_id)
         db.query('INSERT INTO recipes (name,description,user_id) VALUES (?,?,?)', [name, desc, request.session.user_id], function (error, result) {
             if (!error) {
                 response.status(200).json({ status: 'ok', recipeId:result.insertId  });

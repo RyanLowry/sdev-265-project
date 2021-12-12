@@ -97,7 +97,7 @@ export class RecipeSelectorComponent implements OnInit {
       this.ingredientsItem = item.ingredient;
       this.preparedItem = item.preparation;
     }
-
+    console.log(this.selectedItem)
 
   }
 
@@ -118,7 +118,6 @@ export class RecipeSelectorComponent implements OnInit {
           let prep = this.preparedItem;
           let ingredient = this.ingredientsItem;
           this.steps[itemIndex] = new RecipeItem(this.steps[itemIndex].id!, parseInt(this.recipeId), measurement, ingredient, prep);
-          console.log(this.steps)
         } else {
 
         }
@@ -136,7 +135,6 @@ export class RecipeSelectorComponent implements OnInit {
           let prep = this.preparedItem;
           let ingredient = this.ingredientsItem;
           this.steps?.push(new RecipeItem(e.body.itemId, parseInt(this.recipeId), measurement, ingredient, prep))
-          console.log(this.steps)
         } else {
 
         }
