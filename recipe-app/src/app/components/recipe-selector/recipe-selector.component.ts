@@ -17,6 +17,7 @@ export class RecipeSelectorComponent implements OnInit {
   selectedItem?: RecipeItem;
   recipeId: string = '';
   routeState: any;
+  recipeInstructions?:string;
 
   constructor(private _router: Router, private server: ServerService) {
     if (this._router) {
@@ -25,11 +26,18 @@ export class RecipeSelectorComponent implements OnInit {
         if (this.routeState) {
           this.recipeId = this.routeState.recipeId;
           localStorage.setItem("currentRecipe", this.recipeId as string);
+          console.log(this.routeState.instructions)
+          
+          this.recipeInstructions = this.routeState.instructions;
+          localStorage.setItem("currentInstructions", this.recipeInstructions as string);
         }
       }
     }
     if (localStorage.getItem("currentRecipe")) {
       this.recipeId = localStorage.getItem("currentRecipe") || '';
+    }
+    if (localStorage.getItem("currentInstructions") || this.recipeInstructions != '') {
+      this.recipeInstructions = localStorage.getItem("currentInstructions") || '';
     }
   }
 
@@ -42,11 +50,8 @@ export class RecipeSelectorComponent implements OnInit {
 
         console.log(e.body.steps)
         for (let step of e.body.steps) {
-          console.log(step)
           this.steps?.push(new RecipeItem(step.recipeItem_id, step.recipeId, step.measurement, step.ingredient, step.preparation))
         }
-        // this.recipes?.push(new Recipe())
-        // this._router.navigateByUrl('/recipe-builder',{state:{user: e.body.user}})
       } else {
 
       }
@@ -54,10 +59,10 @@ export class RecipeSelectorComponent implements OnInit {
   }
 
 
-  updateRecipeInformation(instructions:string){
+  updateRecipeInformation(){
     this.server.updateRecipeInfo({
       recipeId: this.recipeId,
-      instructions: instructions,
+      instructions: this.recipeInstructions,
       itemLength:this.steps.length
     }).then((e: any) => {
       if (e.body.status === 'ok') {
@@ -68,6 +73,9 @@ export class RecipeSelectorComponent implements OnInit {
 
       }
     });
+  }
+  returnToUser(){
+    this._router.navigateByUrl('/user')
   }
 
   checkComplete(sectionItem: any) {

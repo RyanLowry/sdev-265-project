@@ -48,7 +48,7 @@ export class UserInformationComponent implements OnInit {
       if (e.body.status === 'ok') {
         console.log(e.body.recipes)
         for (let recipe of e.body.recipes) {
-          this.recipes?.push(new Recipe(recipe.recipe_id, recipe.name, recipe.description))
+          this.recipes?.push(new Recipe(recipe.recipe_id, recipe.name, recipe.description,recipe.instructions))
         }
         // this.recipes?.push(new Recipe())
         // this._router.navigateByUrl('/recipe-builder',{state:{user: e.body.user}})
@@ -58,9 +58,9 @@ export class UserInformationComponent implements OnInit {
     })
   }
 
-  goToRecipeBuilder(id?:number){
+  goToRecipeBuilder(id?:number,instructions?:string){
     if (id){
-      this._router.navigateByUrl(`/recipe-builder`, { state: { recipeId:id } })
+      this._router.navigateByUrl(`/recipe-builder`, { state: { recipeId:id,instructions:instructions } })
     }
   }
   addRecipe() {

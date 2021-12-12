@@ -34,9 +34,12 @@
 
 
     <h3>Instructions:</h3>
-    <textarea rows="10" #instructions></textarea>
+    <textarea rows="10" [(ngModel)]="recipeInstructions"></textarea>
 
-    <h4>Submit:</h4>
-    <button mat-raised-button color="primary" (click)="updateRecipeInformation(instructions.value)">Submit
-        item</button>
+    <div>
+        <button mat-raised-button color="primary" (click)="updateRecipeInformation()">Submit
+            item</button>
+        <button mat-raised-button color="secondary" (click)="returnToUser()">Cancel</button>
+    </div>
+
 </div>

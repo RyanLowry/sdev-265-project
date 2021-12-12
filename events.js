@@ -97,11 +97,13 @@ function createRouter(db) {
         var password = request.body.password;
         var email = request.body.email;
         bcrypt.hash(password, 12, function (err, hash) {
-            db.query('INSERT INTO users (username,password,email) VALUES (?,?,?)', [username, hash, email], function (error, results) {
+            db.query('INSERT INTO users (username,password,email) VALUES (?,?,?)', [username, hash, email], function (error, result) {
                 if (!error) {
                     request.session.loggedin = true;
                     request.session.username = username;
-                    request.session.id = results.user_id;
+                    request.session.user_id = result.insertId;
+                    request.session.save((e) => {
+                    })
                     response.status(200).json({ status: 'ok', user: request.session.username });
                 } else {
                     response.status(401).json({ status: 'error' });
@@ -171,9 +173,8 @@ function createRouter(db) {
         });
     });
 
-
-
     router.post('/auth', function (request, response, next) {
+
         var username = request.body.username;
         var password = request.body.password;
         if (username && password) {
@@ -184,8 +185,7 @@ function createRouter(db) {
                             request.session.loggedin = true;
                             request.session.username = username;
                             request.session.user_id = results[0].user_id;
-                            request.session.save((e) => {
-                            })
+                            request.session.save((e) => {})
                             response.status(200).json({ status: 'ok', user: request.session.username, id: results[0].id });
                         } else{
                             response.status(401).json({ status: 'incorrect username/password' })

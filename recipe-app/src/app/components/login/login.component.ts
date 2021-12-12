@@ -22,11 +22,14 @@ export class LoginComponent implements OnInit {
       username: username,
       password: password,
     }).then((e: any) => {
-      if (e.body.status === 'ok') {
-        this._router.navigateByUrl('/user', { state: { user: e.body.user } })
-      } else {
-
+      if (e){
+        if (e.body.status === 'ok') {
+          this._router.navigateByUrl('/user', { state: { user: e.body.user } })
+        } else {
+  
+        }
       }
+
     })
   }
   registerUser(username: string, password: string, confirmPassword: string,email:string) {
