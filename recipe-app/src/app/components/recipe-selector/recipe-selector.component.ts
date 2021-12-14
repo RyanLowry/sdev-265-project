@@ -20,6 +20,7 @@ export class RecipeSelectorComponent implements OnInit {
   recipeInstructions?:string;
 
   constructor(private _router: Router, private server: ServerService) {
+    // need to store infor inside local files to not lose id values
     if (this._router) {
       if (this._router.getCurrentNavigation()?.extras.state) {
         this.routeState = this._router.getCurrentNavigation()?.extras.state;
@@ -39,9 +40,6 @@ export class RecipeSelectorComponent implements OnInit {
     if (localStorage.getItem("currentInstructions") || this.recipeInstructions != '') {
       this.recipeInstructions = localStorage.getItem("currentInstructions") || '';
     }
-  }
-
-  ngOnInit(): void {
     this.server.getRecipeItems({
       recipeId:this.recipeId
     }).then((e: any) => {
@@ -58,7 +56,11 @@ export class RecipeSelectorComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
 
+  }
+
+  // updated existing recipe infor, (mainly the instructions)
   updateRecipeInformation(){
     this.server.updateRecipeInfo({
       recipeId: this.recipeId,
@@ -78,21 +80,7 @@ export class RecipeSelectorComponent implements OnInit {
     this._router.navigateByUrl('/user')
   }
 
-  checkComplete(sectionItem: any) {
-    console.log(sectionItem)
-    switch (sectionItem.section) {
-      case 'measurement':
-        this.measurementItem = sectionItem.value;
-        break;
-      case 'ingredients':
-        this.ingredientsItem = sectionItem.value;
-        break;
-      case 'prepared':
-        this.preparedItem = sectionItem.value;
-        break;
-    }
-  }
-
+  // used for changing existing ingredients
   changeItem(item: RecipeItem) {
     if (this.selectedItem === item) {
       this.selectedItem = undefined;
@@ -109,6 +97,7 @@ export class RecipeSelectorComponent implements OnInit {
 
   }
 
+  // logic to handle new and updated ingredient list items
   generateIngredients() {
     console.log(this.measurementItem)
     let item = new RecipeItem(0, 0, '', '', '')
@@ -148,10 +137,6 @@ export class RecipeSelectorComponent implements OnInit {
         }
       });
     }
-
     this.selectedItem = undefined;
-    // this.measurementItem = '';
-    // this.ingredientsItem = '';
-    // this.preparedItem = '';
   }
 }

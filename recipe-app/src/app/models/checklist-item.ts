@@ -6,11 +6,11 @@ export class ChecklistItem {
     public measurement? : string;
     public preparation? : string;
 
-    constructor(id?:number,recipeId?:number,ingredient?:string,measurement?:string,preparation?:string,isComplete?:boolean){
+    constructor(id?:number,recipeId?:number,ingredient?:string,measurement?:string,isComplete?:boolean){
         this.id = id;
         this.recipeId = recipeId;
         this.measurement = measurement;
-        this.preparation = preparation;
+        this.ingredient = ingredient;
         this.isComplete = isComplete;
     }
 }

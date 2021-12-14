@@ -1,23 +1,11 @@
 <!-- // TODO: I have no idea why this isn't working, so find a way to make this center -->
 <div class="recipe-creator-container">
-    <mat-tab-group>
-        <mat-tab label="measurement">
-            <app-item-selector #measure (itemCompleteEvent)="checkComplete($event)" [currentType]="'measurement'">
-            </app-item-selector>
-        </mat-tab>
-        <mat-tab label="ingredients">
-            <app-item-selector #ingredient (itemCompleteEvent)="checkComplete($event)" [currentType]="'ingredients'">
-            </app-item-selector>
-        </mat-tab>
-        <mat-tab label="prepared">
-            <app-item-selector #prepared (itemCompleteEvent)="checkComplete($event)" [currentType]="'prepared'">
-            </app-item-selector>
-        </mat-tab>
-    </mat-tab-group>
+<div>
+    <div class="recipe-item">Measurement:<input type="text" [(ngModel)]="measurementItem" name="measurement"/></div>
+    <div class="recipe-item">Ingredient:<input type="text"  [(ngModel)]="ingredientsItem"/></div>
+    <div class="recipe-item">Prepared:<input type="text"  [(ngModel)]="preparedItem"/></div>
+</div>
 
-    <div>Measurement:{{measurementItem}}</div>
-    <div>Ingredient:{{ingredientsItem}}</div>
-    <div>Prepared:{{preparedItem}}</div>
 
     <div>
         <button mat-raised-button color="primary" style="margin-top:15px; margin-bottom:15px;"

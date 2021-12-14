@@ -1,7 +1,8 @@
+// this is unnecessary and a big flaw in the project. 
+// Angular has a good routing scheme and in a perfect world we could move these around to different modules rather than keep them in one place.
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-// import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,7 +16,10 @@ import { MatTab, MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule} from '@angular/material/card'
+import { MatCardModule} from '@angular/material/card';
+import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox'
+import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -34,9 +38,11 @@ import { MatCardModule} from '@angular/material/card'
     HttpClientModule,
     MatButtonModule,
     MatIconModule,
-    // MatDialogModule,
-    // MatDialogRef,
+    MatCheckboxModule,
+    FormsModule,
+    MatIconModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     MatCardModule
   ],
   providers: [],

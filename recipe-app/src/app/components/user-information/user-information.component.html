@@ -33,12 +33,18 @@
                                 </div>
                             </mat-card-content>
                             <mat-card-actions class="recipe-buttons">
-                                <button mat-raised-button (click)="goToRecipeBuilder(recipe.id,recipe.instructions)" color="primary">
-                                    View
+                                <button mat-raised-button (click)="shareRecipe(recipe.id)" color="primary">
+                                    <mat-icon>share</mat-icon>
+                                    share
                                 </button>
-                                <button mat-raised-button (click)="goToRecipeBuilder(recipe.id,recipe.instructions)" color="primary">
+                                <button mat-raised-button (click)="deleteRecipe(recipe)" color="primary">
+                                    <mat-icon>delete</mat-icon>
+                                    delete
+                                </button>
+                                <button mat-raised-button (click)="goToRecipeBuilder(recipe.id,recipe.instructions)"
+                                    color="primary">
                                     <mat-icon>edit</mat-icon>
-                                    Edit
+                                    view/Edit
                                 </button>
                             </mat-card-actions>
                         </mat-card>
@@ -47,10 +53,65 @@
             </div>
 
         </mat-tab>
+        <mat-tab label="shared recipes" class="user-header">
+            <div class="user-tab-info">
+                <div class="recipe-holder">
+                    <div *ngFor="let recipe of sharedRecipes">
+                        <mat-card class="recipe-card">
+
+                            <mat-card-content class="recipe-info">
+                                <h3 class="recipe-name">
+                                    {{recipe.name}}
+                                </h3>
+                                <div class="recipe-description">
+                                    Description: {{recipe.description}}
+                                </div>
+                            </mat-card-content>
+                            <mat-card-actions class="recipe-buttons">
+                                <button mat-raised-button (click)="goToRecipeBuilder(recipe.id,recipe.instructions)"
+                                    color="primary">
+                                    <mat-icon>edit</mat-icon>
+                                    view/Edit
+                                </button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
         <mat-tab label="Checklists" class="user-header">
-            <button (click)="addChecklist()">
-                Add Checklist
-            </button>
+            <div class="user-tab-info">
+                <button mat-raised-button (click)="addChecklist()" color="primary">
+                    <mat-icon>add</mat-icon>
+                    Add Checklist
+                </button>
+                <div class="recipe-holder">
+                    <div *ngFor="let checklist of checklists">
+                        <mat-card class="recipe-card">
+
+                            <mat-card-content class="recipe-info">
+                                <h3 class="recipe-name">
+                                    {{checklist.name}}
+                                </h3>
+                                <div class="recipe-description">
+                                    Description: {{checklist.description}}
+                                </div>
+                            </mat-card-content>
+                            <mat-card-actions class="recipe-buttons">
+                                <button mat-raised-button (click)="deleteChecklist(checklist)" color="primary">
+                                    <mat-icon>delete</mat-icon>
+                                    delete
+                                </button>
+                                <button mat-raised-button (click)="goToChecklist(checklist.id)"
+                                    color="primary">
+                                    <mat-icon>edit</mat-icon>
+                                    view/Edit
+                                </button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
         </mat-tab>
     </mat-tab-group>
 </div>
