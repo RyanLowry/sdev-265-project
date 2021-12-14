@@ -1,33 +1,38 @@
 <!-- // TODO: I have no idea why this isn't working, so find a way to make this center -->
+
 <div class="recipe-creator-container">
-<div>
-    <div class="recipe-item">Measurement:<input type="text" [(ngModel)]="measurementItem" name="measurement"/></div>
-    <div class="recipe-item">Ingredient:<input type="text"  [(ngModel)]="ingredientsItem"/></div>
-    <div class="recipe-item">Prepared:<input type="text"  [(ngModel)]="preparedItem"/></div>
-</div>
+    <div style="width:500px;">
+        <mat-card>
+            <div class="recipe-inputs">
+                <div class="recipe-item">Measurement:<input type="text" [(ngModel)]="measurementItem"
+                        name="measurement" />
+                </div>
+                <div class="recipe-item">Ingredient:<input type="text" [(ngModel)]="ingredientsItem" /></div>
+                <div class="recipe-item">Prepared:<input type="text" [(ngModel)]="preparedItem" /></div>
+            </div>
 
+            <div>
+                <button mat-raised-button color="primary" style="margin-top:15px; margin-bottom:15px;"
+                    [disabled]="measurementItem === '' || ingredientsItem === ''" (click)="generateIngredients()">Save
+                    Instruction</button>
+            </div>
 
-    <div>
-        <button mat-raised-button color="primary" style="margin-top:15px; margin-bottom:15px;"
-            [disabled]="measurementItem === '' || ingredientsItem === ''" (click)="generateIngredients()">Save
-            Instruction</button>
+            <h3>Ingredient list:</h3>
+            <div *ngFor="let step of steps; let num = index">
+                <div (click)="changeItem(step)" class="ing-item" [ngClass]="{'selected-item': selectedItem == step}">
+                    {{num + 1}}: {{step.measurement}} {{step.ingredient}}
+                    {{step.preparation}}</div>
+            </div>
+
+            <div class="instruction-holder">
+                <h3>Instructions:</h3>
+                <textarea style="width:450px" rows="10" [(ngModel)]="recipeInstructions"></textarea>
+            </div>
+            <div>
+                <button mat-raised-button color="primary" (click)="updateRecipeInformation()">Submit
+                    item</button>
+                <button mat-raised-button color="secondary" (click)="returnToUser()">Cancel</button>
+            </div>
+        </mat-card>
     </div>
-
-    <h3>Ingredient list:</h3>
-    <div *ngFor="let step of steps; let num = index">
-        <div (click)="changeItem(step)" class="ing-item" [ngClass]="{'selected-item': selectedItem == step}"> {{num
-            + 1}}: {{step.measurement}} {{step.ingredient}}
-            {{step.preparation}}</div>
-    </div>
-
-
-    <h3>Instructions:</h3>
-    <textarea rows="10" [(ngModel)]="recipeInstructions"></textarea>
-
-    <div>
-        <button mat-raised-button color="primary" (click)="updateRecipeInformation()">Submit
-            item</button>
-        <button mat-raised-button color="secondary" (click)="returnToUser()">Cancel</button>
-    </div>
-
 </div>

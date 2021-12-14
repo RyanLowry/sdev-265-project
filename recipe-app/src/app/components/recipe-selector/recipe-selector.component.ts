@@ -27,9 +27,8 @@ export class RecipeSelectorComponent implements OnInit {
         if (this.routeState) {
           this.recipeId = this.routeState.recipeId;
           localStorage.setItem("currentRecipe", this.recipeId as string);
-          console.log(this.routeState.instructions)
           
-          this.recipeInstructions = this.routeState.instructions;
+          this.recipeInstructions = this.routeState.instructions || '';
           localStorage.setItem("currentInstructions", this.recipeInstructions as string);
         }
       }
@@ -39,14 +38,13 @@ export class RecipeSelectorComponent implements OnInit {
     }
     if (localStorage.getItem("currentInstructions") || this.recipeInstructions != '') {
       this.recipeInstructions = localStorage.getItem("currentInstructions") || '';
+    } else{
+      this.recipeInstructions = '';
     }
     this.server.getRecipeItems({
       recipeId:this.recipeId
     }).then((e: any) => {
       if (e.body.status === 'ok') {
-        console.log(this.recipeId)
-
-        console.log(e.body.steps)
         for (let step of e.body.steps) {
           this.steps?.push(new RecipeItem(step.recipeItem_id, step.recipeId, step.measurement, step.ingredient, step.preparation))
         }
@@ -68,7 +66,6 @@ export class RecipeSelectorComponent implements OnInit {
       itemLength:this.steps.length
     }).then((e: any) => {
       if (e.body.status === 'ok') {
-        console.log(e.body.item)
         this._router.navigateByUrl('/user')
 
       } else {
@@ -93,17 +90,14 @@ export class RecipeSelectorComponent implements OnInit {
       this.ingredientsItem = item.ingredient;
       this.preparedItem = item.preparation;
     }
-    console.log(this.selectedItem)
 
   }
 
   // logic to handle new and updated ingredient list items
   generateIngredients() {
-    console.log(this.measurementItem)
     let item = new RecipeItem(0, 0, '', '', '')
     if (this.selectedItem) {
       let itemIndex = this.steps.indexOf(this.selectedItem);
-      console.log(itemIndex)
       this.server.updateRecipeItems({
         itemId: this.steps[itemIndex].id,
         measurement: this.measurementItem,

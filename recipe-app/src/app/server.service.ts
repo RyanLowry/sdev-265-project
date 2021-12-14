@@ -74,6 +74,9 @@ export class ServerService {
   shareRecipe(event:any){
     return this.request('POST',  `${this.serverLocation}/shareRecipe`, event)
   }
+  logoutAccount(event:any){
+    return this.request('POST', `${this.serverLocation}/logout`,event)
+  }
   removeChecklistItems(event:any){
     return this.request('DELETE',  `${this.serverLocation}/removeChecklistItem`, event)
   }

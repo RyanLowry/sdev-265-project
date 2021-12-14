@@ -1,34 +1,35 @@
-
 <div class="checklist-creator-container">
+    <div style="width:500px">
+        <mat-card>
+            <div style="margin:25px;" class="recipe-inputs">
+                <div style="margin:15px 0px;" class="recipe-item">Measurement:<input type="text"
+                        [(ngModel)]="measurementItem" /></div>
+                <div style="margin:15px 0px;" class="recipe-item">Ingredient:<input type="text"
+                        [(ngModel)]="ingredientsItem" /></div>
+            </div>
 
-    <div style="margin:25px;">
-        <div style="margin:15px 0px;" class="recipe-item">Measurement:<input type="text" [(ngModel)]="measurementItem" /></div>
-        <div style="margin:15px 0px;" class="recipe-item">Ingredient:<input type="text" [(ngModel)]="ingredientsItem" /></div>
+
+            <div>
+                <button mat-raised-button color="primary" style="margin-top:15px; margin-bottom:15px;"
+                    [disabled]="measurementItem === '' || ingredientsItem === ''" (click)="generateIngredients()">Save
+                    Instruction</button>
+            </div>
+
+            <h3>Ingredient list:</h3>
+            <div *ngFor="let step of checklistItems; let num = index">
+                <div style="display: flex;margin-bottom:25px; justify-content: space-between; width:250px">
+                    <mat-checkbox (change)="onCheck($event,step)" [checked]="step.isComplete || false" color="primary">
+                        {{step.measurement}} {{step.ingredient}}</mat-checkbox>
+                    <button style="margin-left:50px;width:50px;height:40px;" mat-raised-button color="secondary" (click)="removeItem(step)">
+                        <mat-icon [inline]="true">delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div style="margin-top:30px;">
+                <button mat-raised-button color="primary" (click)="returnToUser()">
+                    Return</button>
+            </div>
+        </mat-card>
     </div>
-
-
-    <div>
-        <button mat-raised-button color="primary" style="margin-top:15px; margin-bottom:15px;"
-            [disabled]="measurementItem === '' || ingredientsItem === ''" (click)="generateIngredients()">Save
-            Instruction</button>
-    </div>
-
-    <h3>Ingredient list:</h3>
-    <div *ngFor="let step of checklistItems; let num = index">
-        <div style="display: flex;margin-bottom:25px; justify-content: space-between;">
-            <mat-checkbox (change)="onCheck($event,step)" [checked]="step.isComplete || false" color="primary">
-                {{step.measurement}} {{step.ingredient}}</mat-checkbox>
-                <button style="margin-left:50px;width:50px;height:40px;"mat-raised-button color="secondary">
-                    <mat-icon [inline]="true" (click)="removeItem(step)">delete</mat-icon>
-                </button>
-        </div>
-
-
-    </div>
-
-    <div style="margin-top:30px;">
-        <button mat-raised-button color="primary" (click)="returnToUser()">
-            Return</button>
-    </div>
-
 </div>

@@ -37,10 +37,8 @@ export class ChecklistComponent implements OnInit {
     this.server.getChecklistItems({
       checklistId: this.checklistId
     }).then((e: any) => {
-      console.log(this.checklistId)
       if (e.body.status === 'ok') {
         for (let step of e.body.checklistItems) {
-          console.log(step)
           this.checklistItems?.push(new ChecklistItem(step.checklistItem_id, step.checklist_id, step.ingredient,step.measurement,step.is_complete))
         }
       } else {
@@ -75,13 +73,11 @@ export class ChecklistComponent implements OnInit {
 
   // when a checkbox is checked, need to send to server to update info, kind of inefficient, could do all at once but would then risk loss of data.
   onCheck(event: MatCheckboxChange, checklistItem: ChecklistItem) {
-    console.log(checklistItem)
     if (this.checklistId) {
       this.server.updateChecklistItems({
         checklistItem: checklistItem.id,
         isComplete: event.checked
       }).then((e: any) => {
-        console.log(e)
         if (e.body.status === 'ok') {
           checklistItem.isComplete = event.checked;
         } else {
@@ -93,7 +89,6 @@ export class ChecklistComponent implements OnInit {
 
   // creates the checklist
   generateIngredients() {
-    console.log(this.measurementItem)
     this.server.setChecklistItems({
       measurement: this.measurementItem,
       ingredient: this.ingredientsItem,

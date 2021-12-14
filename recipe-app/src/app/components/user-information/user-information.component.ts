@@ -41,7 +41,6 @@ export class UserInformationComponent implements OnInit {
     this.server.getRecipes({
     }).then((e: any) => {
       if (e.body.status === 'ok') {
-        console.log(e.body.recipes)
         for (let recipe of e.body.recipes) {
           this.recipes?.push(new Recipe(recipe.recipe_id, recipe.name, recipe.description, recipe.instructions))
         }
@@ -52,7 +51,6 @@ export class UserInformationComponent implements OnInit {
     this.server.getChecklist({
     }).then((e: any) => {
       if (e.body.status === 'ok') {
-        console.log(e.body.checklist)
         for (let recipe of e.body.checklist) {
           this.checklists?.push(new Checklist(recipe.checklist_id, recipe.name, recipe.description))
         }
@@ -63,7 +61,6 @@ export class UserInformationComponent implements OnInit {
     this.server.getShared({
     }).then((e: any) => {
       if (e.body.status === 'ok') {
-        console.log(e.body.sharedRecipes)
         for (let recipe of e.body.sharedRecipes) {
           this.sharedRecipes?.push(new Recipe(recipe.recipe_id, recipe.name, recipe.description, recipe.instructions))
         }
@@ -104,7 +101,14 @@ export class UserInformationComponent implements OnInit {
         }
       });
     }
+  }
 
+  logout(){
+    this.server.logoutAccount({}).then((e:any) => {
+      if (e.body.status === 'ok'){
+        this._router.navigateByUrl('/login');
+      }
+    })
   }
 
   goToRecipeBuilder(id?: number, instructions?: string) {

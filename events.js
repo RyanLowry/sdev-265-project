@@ -74,7 +74,12 @@ function createRouter(db) {
             response.status(401).json({ status: 'error' })
         }
     });
-
+    router.post('/logout', function (request, response, next) {
+        request.session.loggedin = false;
+        request.session.username = '';
+        request.session.user_id = '';
+        response.status(200).json({ status: 'ok' });
+    });
     // recipe/recipeitem routes
 
     router.post('/userRecipe', (request, response) => {
@@ -220,7 +225,6 @@ function createRouter(db) {
     router.put('/addChecklistItem', (request, response) => {
         var bool = request.body.isComplete;
         var id = request.body.checklistItem
-        console.log(id)
         db.query('UPDATE checklist_items SET is_complete = ? WHERE checklistItem_id = ?', [bool, id], function (error, result) {
             if (!error) {
                 response.status(200).json({ status: 'ok', item: result });

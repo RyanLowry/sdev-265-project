@@ -1,6 +1,9 @@
 .ing-item:hover{
     background-color: gray;
 }
+.ing-item{
+    width:100%;
+}
 .selected-item{
     background-color: gray;
 }
@@ -8,10 +11,19 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width:500px;
+    align-items: center;
+    height:100vh;
 }
 .recipe-item{
     display: flex;
     margin-top:20px;
     margin-bottom:20px;
+}
+.instruction-holder{
+    margin-top:25px;
+}
+
+.recipe-inputs > div{
+    width:250px;
+    display: flex; justify-content: space-between;
 }
