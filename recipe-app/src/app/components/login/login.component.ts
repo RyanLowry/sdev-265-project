@@ -26,21 +26,18 @@ export class LoginComponent implements OnInit {
         if (e.body.status === 'ok') {
           this._router.navigateByUrl('/user', { state: { user: e.body.user } });
         } else {
-          this.toastr.error(e.body.status)
         }
       } else{
-        this.toastr.error("Error")
       }
 
-    }).catch((e:any)=>{
-      this.toastr.error(e.error.status)
-    });
+    })
   }
   // the logic to register a non created user
   registerUser(username: string, password: string, confirmPassword: string,email:string) {
     // only checks if they are the same and not much more, this is one things that would need to be made better, both front and back end
     if (password.length <= 3){
-      this.toastr.error("password not long enough")
+      this.toastr.error("password not long enough");
+      return;
     }
     if ((password === confirmPassword)) {
       this.server.createAccount({
